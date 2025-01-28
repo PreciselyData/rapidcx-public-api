@@ -1,0 +1,26 @@
+title: Problems
+x-stoplight:
+  id: bv9dcied2knmk
+type: object
+properties:
+  errors:
+    type: array
+    x-stoplight:
+      id: xpb9ltiirlb9b
+    items:
+      $ref: ./Problem.yaml
+      x-stoplight:
+        id: 64e0cwdce2l5a
+examples:
+  - errors:
+      - code: 42R
+        title: Wrongly formated payload
+        status: 400
+        detail: Wrong content payload
+        instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+  - errors:
+      - code: 231A
+        title: The resource requested could not be found.
+        status: 404
+        detail: The document with id 86b53f0e-e154-49ca-b0f6-f6949f208ce9 does not exist.
+        instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
