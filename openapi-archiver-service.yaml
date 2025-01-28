@@ -1,0 +1,735 @@
+components:
+  schemas:
+    DocumentCreated:
+      title: DocumentCreated
+      x-stoplight:
+        id: xt6z47eva8zc9
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: zl0jh73jkdjaf
+          format: uuid
+      description: Document was successfully created in RapidCX platform
+      x-examples:
+        Example 1:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        Example 2:
+          id: 86b53f0e-e154-49ca-b0f6-f6949f208ce9
+    OffsetMeta:
+      title: OffsetMeta
+      x-stoplight:
+        id: 209jv403ssfqg
+      type: object
+      properties:
+        total:
+          type: integer
+          x-stoplight:
+            id: wry30c01r2gcn
+          format: int32
+          example: 5000
+          minimum: 0
+        offset:
+          type: integer
+          x-stoplight:
+            id: eedmjaiu7jtew
+          format: int32
+          example: 100
+          minimum: 0
+        limit:
+          type: integer
+          x-stoplight:
+            id: phcfg9gl09r77
+          format: int32
+          example: 100
+          minimum: 1
+  responses:
+    BadRequest:
+      description: 'Error in the payload - wrong format or missing fields, see error object for more details.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: L01
+                    title: Wrong query structure
+                    status: 400
+                    detail: Your archiver query is wrongly formatted. See instance object for more details
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+            Example 2:
+              value:
+                errors:
+                  - code: L02
+                    title: Wrong query structure
+                    status: 400
+                    detail: Your archiver query is wrongly formatted. See instance object for more details
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+    Forbidden:
+      description: 'Operation not allowed, or the privileges of the token are insufficient to perform this action.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 12L
+                    title: Forbidden
+                    status: 403
+                    detail: Privileges of the token are insufficient to perform this action
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+    NotFound:
+      description: File's attributes was not found.
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 42R
+                    title: File not foung
+                    status: 404
+                    detail: File with given ID do not exists
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+    Denied:
+      description: Not authorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 72D
+                    title: Unauthorized
+                    status: 401
+                    detail: Authentication credentials were not provided or are invalid.
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+  securitySchemes:
+    Authorization:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://localhost/auth'
+          tokenUrl: 'https://localhost/token'
+          refreshUrl: 'https://localhost/refresh'
+          scopes:
+            read: read-only
+            read-write: read-write
+      description: Bearer token required for authentication and authorization
+  requestBodies:
+    PatchBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - actions
+            properties:
+              actions:
+                type: array
+                x-stoplight:
+                  id: buzxhqcq4c2m9
+                items:
+                  x-stoplight:
+                    id: 8zo2vgtzyf1fr
+                  type: object
+                  required:
+                    - operation
+                    - path
+                  properties:
+                    operation:
+                      x-stoplight:
+                        id: gezhroskbch36
+                      enum:
+                        - add
+                        - remove
+                        - replace
+                    value:
+                      type: string
+                      x-stoplight:
+                        id: ch0jfku1cb71a
+                      description: Value is not required in `remove` operation
+                    path:
+                      type: string
+                      x-stoplight:
+                        id: v8o1la7crr0jo
+          examples:
+            Example 1:
+              value:
+                actions:
+                  - operation: add
+                    value: new value
+                    path: /attribute/property-y
+            Example 2:
+              value:
+                actions:
+                  - operation: add
+                    value: new value
+                    path: /attribute/property-y
+                  - operation: remove
+                    path: /attribute/property-y
+                  - operation: replace
+                    value: new value
+                    path: /attribute/property-z
+            Example 3:
+              value:
+                actions:
+                  - operation: add
+                    value: '1'
+                    path: /attribute/property-x
+      description: Patching operations on files
+  parameters:
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: false
+      schema:
+        type: string
+        example: application/json
+      description: Indicates the format of the request body being sent.
+    Accept:
+      name: Accept
+      in: header
+      required: false
+      schema:
+        type: string
+        example: application/json
+      description: Specifies the format in which the client expects a response
+    RapidCX-Api-Version:
+      name: RapidCX-Api-Version
+      in: header
+      required: true
+      schema:
+        type: string
+        format: date
+        default: '2025-01-23'
+        example: '2025-01-23'
+      description: The API version
+info:
+  title: Rapid CX Archiver API
+  version: '2025-01-23'
+  description: This specification describes the Archiver API of the EngageOne RapidCX Platform.
+  contact:
+    name: Preciesly
+    url: 'https://www.precisely.com/'
+    email: michal.karkowski@precisely.com
+  termsOfService: ''
+  license:
+    name: Apache License 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+openapi: 3.1.1
+paths:
+  /archives/files:
+    post:
+      description: Creates and uploads file with it's attributes into RapidCX platform.
+      operationId: createDocument
+      parameters:
+        - in: header
+          name: Content-Type
+          schema:
+            type: string
+          description: Indicates type of a file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file_payload
+                - file_name
+              properties:
+                file_payload:
+                  type: string
+                  format: binary
+                  x-stoplight:
+                    id: ber2lkhf3fu6z
+                file_name:
+                  type: string
+                  x-stoplight:
+                    id: 3rti1pez63suq
+                attributes:
+                  type: array
+                  x-stoplight:
+                    id: 192zxr3od58we
+                  description: 'Optional attributes of the document. Using `rcx:` namespace in attribute key is prohibited.'
+                  items:
+                    x-stoplight:
+                      id: 6915utgou9sx2
+                    type: object
+                    minProperties: 1
+                    properties:
+                      key:
+                        type: string
+                        x-stoplight:
+                          id: 7pceja9d545nh
+                      value:
+                        type: string
+                        x-stoplight:
+                          id: tr17heu9wd8ng
+            examples:
+              Example 1:
+                value:
+                  file_payload: tbd
+                  file_name: bank_notification.pdf
+                  attributes:
+                    - key: owner
+                      value: bankA
+                    - key: uploaded
+                      value: 11-12-2024
+            encoding:
+              file:
+                contentType: application/octet-stream
+              description:
+                contentType: text/plain
+        required: true
+        description: 'File body structure '
+      responses:
+        '201':
+          description: Document successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentCreated'
+              examples:
+                Example 1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                Example 2:
+                  value:
+                    id: 86b53f0e-e154-49ca-b0f6-f6949f208ce9
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+                example: 'https://api.us-east-1.rapidcx.engageone.co/archives/files/86b53f0e-e154-49ca-b0f6-f6949f208ce9'
+              description: Created file location URL
+        '400':
+          $ref: '#/components/responses/BadRequest'
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 11L
+                    title: Wrongly formated payload
+                    status: 400
+                    detail: Wrong content payload
+                    instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+          description: 'Error in the payload - wrong format or missing fields, see error object for more details.'
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 13L
+                        title: Too many requests
+                        status: 429
+                        detail: You reached your request limits
+                        instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+          headers:
+            Content-Type:
+              schema:
+                example: application/problem+json
+                type: string
+      summary: Create File
+      x-stoplight:
+        id: p9155jg3zpn7q
+      tags:
+        - Archiver
+    parameters:
+      - $ref: '#/components/parameters/RapidCX-Api-Version'
+    get:
+      summary: Search for files
+      tags:
+        - Archiver
+      responses:
+        '200':
+          description: Result returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    x-stoplight:
+                      id: 7ybtv80nre15u
+                    items:
+                      x-stoplight:
+                        id: 90qhteas9vext
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          x-stoplight:
+                            id: d8yc85z14vm0m
+                          format: uuid
+                          x-faker: datatype.uuid
+                        attributes:
+                          type: array
+                          x-stoplight:
+                            id: kv6ljvwbuytrv
+                          items:
+                            x-stoplight:
+                              id: cmh038arhdihd
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                                x-stoplight:
+                                  id: l991120orerf1
+                              value:
+                                type: string
+                                x-stoplight:
+                                  id: r22bflfi9rwse
+                  meta:
+                    $ref: '#/components/schemas/OffsetMeta'
+              examples:
+                Example 1:
+                  value:
+                    data:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        attributes:
+                          - key: status
+                            value: approved
+                          - key: createdDate
+                            value: '2024-12-16T07:59:53.552806'
+                    meta:
+                      total: 5000
+                      offset: 100
+                      limit: 100
+                Example 2:
+                  value:
+                    data:
+                      - id: 2c83acb7-1d2c-4796-b133-efdeaa4d87f8
+                        attributes:
+                          - key: status
+                            value: approved
+                          - key: createdDate
+                            value: '2024-09-02T21:42:52.727032807'
+                      - id: eff67038-ef5f-4dfa-bd83-11eabc96a44b
+                        attributes:
+                          - key: status
+                            value: denied
+                          - key: createdDate
+                            value: '2024-12-16T07:59:53.552806'
+                    meta:
+                      total: 5000
+                      offset: 100
+                      limit: 100
+          headers: {}
+        '204':
+          description: No results found based on the given query
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+      operationId: searchFiles
+      x-stoplight:
+        id: ryle4ursqqdts
+      description: |-
+        Allows to search for documents by certain creteria.
+
+        Search endpoint uses Lucene syntax. Supported operations are described in [article](https://gitlab.com/preciselydata/engageone/rapid-cx/pocs/poc-rapidcx-group/public-api-rapidcx/-/blob/main/docs/Archiver-Search-Request-Syntax.md?ref_type=heads)
+      requestBody:
+        content: {}
+        description: ''
+      parameters:
+        - schema:
+            type: string
+            example: dGFnOipiYW5rKg==
+          in: query
+          name: query
+          description: Base64 encoded query that will be used for search purposes.
+          required: true
+        - schema:
+            type: array
+            items:
+              x-stoplight:
+                id: 8zo2fgtzyf1fr
+              type: string
+            uniqueItems: true
+            example:
+              - id
+              - status
+              - creationDate
+          in: query
+          name: select
+          description: List of fields that will be retrieved.
+          required: true
+        - schema:
+            type: boolean
+            default: false
+            example: true
+          in: query
+          name: count
+          description: Should Archive API return amount of results.
+        - $ref: '#/components/parameters/Accept'
+        - schema:
+            type: integer
+          in: query
+          name: offset
+          description: Starting point of the current data chunk.
+        - schema:
+            type: integer
+          in: query
+          name: limit
+          description: Number of records fetched in this response.
+  '/archives/files/{file_id}':
+    parameters:
+      - schema:
+          type: string
+        name: file_id
+        in: path
+        required: true
+        description: ID of the file on which you want to perform the operation.
+      - $ref: '#/components/parameters/RapidCX-Api-Version'
+    get:
+      summary: Download file
+      tags:
+        - Archiver
+      responses:
+        '200':
+          description: File downloaded successfully
+          headers:
+            Content-Type:
+              schema:
+                example: application/json
+                type: string
+              description: Indicate the original media type of a resource
+          content: {}
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          description: The Accept header that you specified do not match with the file
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 42R
+                        title: Accept header do not match with the file extension
+                        status: 415
+                        detail: Inconsistency between Accept header and file extension
+                        instance: /archiver/6090146f-1023-4f7c-8eed-10a045d37ae8
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+          headers:
+            Content-Type:
+              schema:
+                example: application/problem+json
+                type: string
+      operationId: downloadFile
+      x-stoplight:
+        id: v7kla9ht9s5w9
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      description: Allows to download file from Archiver storage
+    delete:
+      summary: Delete File
+      tags:
+        - Archiver
+      responses:
+        '204':
+          description: File deleted successfully
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+      operationId: deleteFile
+      x-stoplight:
+        id: ww56k49ev6r4w
+      description: Allows to delete file with it's all attributes from Archiver storage
+  '/archives/files/{file_id}/attributes':
+    patch:
+      summary: Modify file attributes
+      tags:
+        - Archiver
+      responses:
+        '204':
+          description: File successfully modified
+          headers:
+            Location:
+              schema:
+                type: string
+              description: Updated file location URL
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+      operationId: modifyFileAttributes
+      x-stoplight:
+        id: r00oiu0k4i3mj
+      requestBody:
+        $ref: '#/components/requestBodies/PatchBody'
+      description: Allows to modify the attributes of given file
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+    parameters:
+      - schema:
+          type: string
+        name: file_id
+        in: path
+        required: true
+        description: ID of the file on which you want to perform the operation
+      - $ref: '#/components/parameters/RapidCX-Api-Version'
+    get:
+      summary: Get file attributes
+      tags:
+        - Archiver
+      responses:
+        '200':
+          description: Attributes successfully returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attributes:
+                    type: array
+                    x-stoplight:
+                      id: x0c8ag89awi1x
+                    items:
+                      x-stoplight:
+                        id: izyvrsickr680
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          x-stoplight:
+                            id: 6h9ji8b4hkh55
+                        value:
+                          type: string
+                          x-stoplight:
+                            id: q6cz5brpl4tjh
+              examples:
+                Example 1:
+                  value:
+                    attributes:
+                      - key: attribute_key_1
+                        value: attribute_value_1
+                      - key: attribute_key_2
+                        value: attribute_value_2
+                Example 2:
+                  value:
+                    attributes:
+                      - key: attribute_key_1
+                        value: attribute_value_1
+                      - key: attribute_key_2
+                        value: attribute_value_2
+                      - key: attribute_key_3
+                        value: attribute_value_3
+                Example 3:
+                  value:
+                    attributes:
+                      - key: attribute_key_1
+                        value: attribute_value_1
+        '401':
+          $ref: '#/components/responses/Denied'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+      operationId: getFileAttributes
+      x-stoplight:
+        id: 7brk5nvkikf00
+      description: Allows to retrieve attributes from a file
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+servers:
+  - description: US-EAST-1 environment
+    url: 'https://api.us-east-1.rapidcx.engageone.co'
+  - description: EU-WEST-1 environment
+    url: 'https://api.eu-west-1.rapidcx.engageone.co'
+tags:
+  - name: Archiver
+    description: This is an Archiver API
+security:
+  - Authorization: []
