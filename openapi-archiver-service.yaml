@@ -138,13 +138,16 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: 'https://localhost/auth'
-          tokenUrl: 'https://localhost/token'
-          refreshUrl: 'https://localhost/refresh'
+          authorizationUrl: 'https://auth.developer.rapidcx.engageone.co/auth2/authorize'
+          tokenUrl: 'https://auth.developer.rapidcx.engage.com/auth2/token'
+          refreshUrl: 'https://auth.developer.rapidcx.engage.com/auth2/token'
           scopes:
             read: read-only
             read-write: read-write
-      description: Bearer token required for authentication and authorization
+      description: |+
+        Bearer token required for authentication and authorization.
+
+        Token portal: https://tokens.developer.rapidcx.engageone.co/
   requestBodies:
     PatchBody:
       content:
