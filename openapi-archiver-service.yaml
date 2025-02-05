@@ -492,10 +492,10 @@ paths:
       parameters:
         - schema:
             type: string
-            example: dGFnOipiYW5rKg==
+            example: tag%3A%2Abank%2A
           in: query
           name: query
-          description: Base64 encoded query that will be used for search purposes.
+          description: URL encoded query that will be used for search purposes.
           required: true
         - schema:
             type: array
