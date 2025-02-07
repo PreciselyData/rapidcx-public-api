@@ -608,6 +608,7 @@ components:
       required: false
       schema:
         type: string
+        example: application/json
       description: Indicates the format of the request body being sent.
     Accept:
       name: Accept
@@ -615,6 +616,7 @@ components:
       required: false
       schema:
         type: string
+        example: application/json
       description: Specifies the format in which the client expects a response
 tags:
   - name: Communications
