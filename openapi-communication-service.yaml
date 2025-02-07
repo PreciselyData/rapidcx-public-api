@@ -3,25 +3,25 @@ x-stoplight:
   id: ez03q9slzf0uc
 info:
   title: Rapid CX Communications API
-  version: "2025-01-23"
+  version: '2025-01-23'
   description: This specification describes the public Communication API of the EngageOne RapidCX Platform.
   summary: EngageOne RapidCX Communication API
   contact:
     name: Precisely
-    url: "https://www.precisely.com"
+    url: 'https://www.precisely.com'
     email: api-taskid@precisely.com
   license:
     name: Apache License 2.0
-    url: "https://www.apache.org/licenses/LICENSE-2.0"
-  termsOfService: ""
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+  termsOfService: ''
   x-api-id: f638989f-b3af-4b73-8fd2-8892491dd884
   x-audience:
     - external-partner
     - external-public
 servers:
-  - url: "https://api.us-east-1.rapidcx.engageone.co"
+  - url: 'https://api.us-east-1.rapidcx.engageone.co'
     description: US-EAST-1 environment
-  - url: "https://api.eu-west-1.rapidcx.engageone.co"
+  - url: 'https://api.eu-west-1.rapidcx.engageone.co'
     description: EU-WEST-1 environment
 paths:
   /communications:
@@ -30,7 +30,7 @@ paths:
       tags:
         - Communications
       responses:
-        "201":
+        '201':
           description: Communication successfully created
           headers:
             Content-Type:
@@ -41,12 +41,12 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: "https://api.us-east-1.rapidcx.engageone.co/communications/a28f029e-07d6-4403-a821-9424fef1fe65"
+                example: 'https://api.us-east-1.rapidcx.engageone.co/communications/a28f029e-07d6-4403-a821-9424fef1fe65'
               description: Created resource location URI
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DocumentCreatedResponse"
+                $ref: '#/components/schemas/DocumentCreatedResponse'
               examples:
                 Example 1:
                   value:
@@ -54,131 +54,77 @@ paths:
                 Example 2:
                   value:
                     id: be5049b3-0cb2-4fdb-a5d9-708eb03da37c
-        "400":
-          description: "Error in the payload - wrong format or missing fields, see error object for more details"
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: Indicates the original media type of the resource
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: L01
-                        title: Wrongly formated payload
-                        status: 400
-                        detail: Wrong content payload
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
-        "401":
-          description: Not authorized
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: Indicates the original media type of the resource
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: 72D
-                        title: Not authorized
-                        status: 401
-                        detail: Authentication credentials were not provided or are invalid
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
-        "403":
-          description: Operation not allowed
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: Indicates the original media type of the resource
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: 12L
-                        title: Forbidden
-                        status: 403
-                        detail: Privileges of the token are insufficient to perform this action
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
-        "405":
-          description: Method not allowed for the specified resource (MethodNotAllowedException)
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: Indicates the original media type of the resource
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: 42R
-                        title: Method Not Allowed
-                        status: 405
-                        detail: Method not allowed for the specified resource
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
-        "413":
-          description: The payload for the body of the request is too large (RequestEntityTooLargeException)
-          headers:
-            Content-Type:
-              schema:
-                type: string
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: 42R
-                        title: Request Entity Too Large
-                        status: 413
-                        detail: The payload for the body of the request is too large
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
-        "429":
-          description: Too Many Requests
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: Indicates the original media type of the resource
-          content:
-            application/problem+json:
-              schema:
-                $ref: ./models/Problems.yaml
-              examples:
-                Example 1:
-                  value:
-                    errors:
-                      - code: 13L
-                        title: Too many requests
-                        status: 429
-                        detail: You reached your request limits
-                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '400':
+          $ref: '#/components/responses/BadRequest'
+          examples:
+            400 BadRequest example:
+              value:
+                errors:
+                  - code: L01
+                    title: Wrongly formated payload
+                    status: 400
+                    detail: Wrong content payload
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '401':
+          $ref: '#/components/responses/Denied'
+          examples:
+            401 Denied example:
+              value:
+                errors:
+                  - code: 72D
+                    title: Not authorized
+                    status: 401
+                    detail: Authentication credentials were not provided or are invalid
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '403':
+          $ref: '#/components/responses/Forbidden'
+          examples:
+            403 Forbidden example:
+              value:
+                errors:
+                  - code: 12L
+                    title: Forbidden
+                    status: 403
+                    detail: Privileges of the token are insufficient to perform this action
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+          405 MethodNotAllowed example:
+            value:
+              errors:
+                - code: 42R
+                  title: Method Not Allowed
+                  status: 405
+                  detail: Method not allowed for the specified resource
+                  instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+          413 RequestToLarge example:
+            value:
+              errors:
+                - code: 42R
+                  title: Request Entity Too Large
+                  status: 413
+                  detail: The payload for the body of the request is too large
+                  instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+          examples:
+            429 TooManyRequests example:
+              value:
+                errors:
+                  - code: 13L
+                    title: Too many requests
+                    status: 429
+                    detail: You reached your request limits
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
         default:
-          description: General error occured
+          description: Unexpected error
           headers:
             Content-Type:
               schema:
                 type: string
+                example: application/problem+json
               description: Indicates the original media type of the resource
           content:
             application/problem+json:
@@ -189,22 +135,23 @@ paths:
         id: 079tssr789dor
       description: Creates communication based on existing and active communication_definition_name in RapidCX
       parameters:
-        - $ref: "#/components/parameters/Content-Type"
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Accept'
       requestBody:
         description: Create communication request body structure
         content:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/EmailCommunicationBody"
-                - $ref: "#/components/schemas/PDFCommunicationBody"
+                - $ref: '#/components/schemas/EmailCommunicationBody'
+                - $ref: '#/components/schemas/PDFCommunicationBody'
                   x-stoplight:
                     id: c2w63lgkx8kt6
-                - $ref: "#/components/schemas/SMSCommunicationBody"
+                - $ref: '#/components/schemas/SMSCommunicationBody'
                   x-stoplight:
                     id: 2rd1bw72u2ige
             examples:
-              Example 1:
+              email communication example 1:
                 value:
                   communication_definition_name: Bank letter email communication definition 37894
                   document_type: letters
@@ -218,7 +165,7 @@ paths:
                       value: standard
                     - key: Account Number
                       value: GB 55 BUKB 200415 55555555
-              Example 2:
+              email communication example 2:
                 value:
                   communication_definition_name: Bank statement email communication definition 65362
                   document_type: statements
@@ -232,7 +179,7 @@ paths:
                       value: gold
                     - key: Account Number
                       value: GB 55 BUKB 200415 66666666
-              Example 3:
+              pdf communication example 1:
                 value:
                   communication_definition_name: Bank letter pdf communication definition 43627
                   document_type: letters
@@ -254,20 +201,20 @@ paths:
                     - key: Country
                       value: United Kingdom
                     - key: SLA
-                      value: "1"
+                      value: '1'
                     - key: Environment Code
                       value: P
                     - key: Duplex
-                      value: "Y"
+                      value: 'Y'
                     - key: Colored
-                      value: "Y"
+                      value: 'Y'
                     - key: Std Membership Id
-                      value: "67432"
+                      value: '67432'
                     - key: Envelope Code
                       value: AEID025
                     - key: Post Class
                       value: Whistl
-              Example 4:
+              pdf communication example 2:
                 value:
                   communication_definition_name: Bank statement pdf communication definition 75362
                   document_type: statements
@@ -289,20 +236,20 @@ paths:
                     - key: Country
                       value: United Kingdom
                     - key: SLA
-                      value: "1"
+                      value: '1'
                     - key: Environment Code
                       value: P
                     - key: Duplex
-                      value: "Y"
+                      value: 'Y'
                     - key: Colored
-                      value: "N"
+                      value: 'N'
                     - key: Std Membership Id
-                      value: "78745"
+                      value: '78745'
                     - key: Envelope Code
                       value: AEID025
                     - key: Post Class
                       value: Whistl
-              Example 5:
+              sms communication example 1:
                 value:
                   communication_definition_name: Bank statement SMS communication definition 78534
                   document_type: statements
@@ -315,7 +262,7 @@ paths:
                       value: standard
                     - key: Account Number
                       value: GB 55 BUKB 200415 54666666
-              Example 6:
+              sms communication example 2:
                 value:
                   communication_definition_name: Bank letter SMS communication definition 34355
                   document_type: letters
@@ -329,8 +276,135 @@ paths:
                     - key: Account Number
                       value: GB 55 BUKB 200415 66666666
     parameters:
-      - $ref: "#/components/parameters/RapidCX-Api-Version"
+      - $ref: '#/components/parameters/RapidCX-Api-Version'
 components:
+  responses:
+    BadRequest:
+      description: 'Error in the payload - wrong format or missing fields, see error object for more details.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: L01
+                    title: Wrong query structure
+                    status: 400
+                    detail: Wrong content payload. See instance object for more details
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
+    Denied:
+      description: Not authorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 72D
+                    title: Not authorized
+                    status: 401
+                    detail: Authentication credentials were not provided or are invalid.
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
+    Forbidden:
+      description: 'Operation not allowed, or the privileges of the token are insufficient to perform this action.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 12L
+                    title: Forbidden
+                    status: 403
+                    detail: Privileges of the token are insufficient to perform this action
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
+    MethodNotAllowed:
+      description: Method not allowed for the specified resource (MethodNotAllowedException)
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 42R
+                    title: Method Not Allowed
+                    status: 405
+                    detail: Method not allowed for the specified resource
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
+    RequestTooLarge:
+      description: The payload for the body of the request is too large (RequestEntityTooLargeException)
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 42R
+                    title: Request Entity Too Large
+                    status: 413
+                    detail: The payload for the body of the request is too large
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/problem+json:
+          schema:
+            $ref: ./models/Problems.yaml
+          examples:
+            Example 1:
+              value:
+                errors:
+                  - code: 13L
+                    title: Too many requests
+                    status: 429
+                    detail: You reached your request limits
+                    instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+      headers:
+        Content-Type:
+          schema:
+            example: application/problem+json
+            type: string
+          description: Indicates the original media type of the resource
   schemas:
     DocumentCreatedResponse:
       title: DocumentCreatedResponse
@@ -349,7 +423,7 @@ components:
           example: e2b5d3d9-8e08-4459-b6c5-dc7a5118a3d9
           description: The uuid of the communications created.
     CommonCommunicationBody:
-      title: ""
+      title: ''
       x-stoplight:
         id: w6wjeregmzh7i
       type: object
@@ -369,7 +443,7 @@ components:
           x-stoplight:
             id: bojpimqqrrltn
           example: letter
-          description: "The category of the document being created (e.g., letters, statements, claims)"
+          description: 'The category of the document being created (e.g., letters, statements, claims)'
         communication_type:
           x-stoplight:
             id: k4fgdf57l74jk
@@ -423,7 +497,7 @@ components:
       x-stoplight:
         id: dodn8lqe1a9ss
       allOf:
-        - $ref: "#/components/schemas/CommonCommunicationBody"
+        - $ref: '#/components/schemas/CommonCommunicationBody'
           x-stoplight:
             id: u5u4djb3bc468
         - type: object
@@ -442,7 +516,7 @@ components:
               x-stoplight:
                 id: thpo545xm2pry
               example: John Doe
-              description: "The recipient's name, as used in the communication's body"
+              description: 'The recipient''s name, as used in the communication''s body'
       examples:
         - communication_definition_name: string
           document_type: string
@@ -456,7 +530,7 @@ components:
       x-stoplight:
         id: gh4dorsz8cpbj
       allOf:
-        - $ref: "#/components/schemas/CommonCommunicationBody"
+        - $ref: '#/components/schemas/CommonCommunicationBody'
           x-stoplight:
             id: oxtllv2be0f8c
         - type: object
@@ -481,7 +555,7 @@ components:
       x-stoplight:
         id: mqjzmkd9o40f1
       allOf:
-        - $ref: "#/components/schemas/CommonCommunicationBody"
+        - $ref: '#/components/schemas/CommonCommunicationBody'
           x-stoplight:
             id: fq5omqhqvnem9
         - type: object
@@ -516,9 +590,9 @@ components:
           scopes:
             read: read-only
             read-write: read-write
-      description: |+
+      description: |-
         Bearer token required for authentication and authorization.
-        
+
         Token portal: https://tokens.developer.rapidcx.engageone.co/
   parameters:
     RapidCX-Api-Version:
