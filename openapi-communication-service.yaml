@@ -1,0 +1,541 @@
+openapi: 3.1.0
+x-stoplight:
+  id: ez03q9slzf0uc
+info:
+  title: Rapid CX Communications API
+  version: "2025-01-23"
+  description: This specification describes the public Communication API of the EngageOne RapidCX Platform.
+  summary: EngageOne RapidCX Communication API
+  contact:
+    name: Precisely
+    url: "https://www.precisely.com"
+    email: api-taskid@precisely.com
+  license:
+    name: Apache License 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
+  termsOfService: ""
+  x-api-id: f638989f-b3af-4b73-8fd2-8892491dd884
+  x-audience:
+    - external-partner
+    - external-public
+servers:
+  - url: "https://api.us-east-1.rapidcx.engageone.co"
+    description: US-EAST-1 environment
+  - url: "https://api.eu-west-1.rapidcx.engageone.co"
+    description: EU-WEST-1 environment
+paths:
+  /communications:
+    post:
+      summary: Create communication
+      tags:
+        - Communications
+      responses:
+        "201":
+          description: Communication successfully created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+            Location:
+              schema:
+                type: string
+                format: uri
+                example: "https://api.us-east-1.rapidcx.engageone.co/communications/a28f029e-07d6-4403-a821-9424fef1fe65"
+              description: Created resource location URI
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentCreatedResponse"
+              examples:
+                Example 1:
+                  value:
+                    id: d8a83c3c-e046-4328-929b-33f7609a6fd6
+                Example 2:
+                  value:
+                    id: be5049b3-0cb2-4fdb-a5d9-708eb03da37c
+        "400":
+          description: "Error in the payload - wrong format or missing fields, see error object for more details"
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: L01
+                        title: Wrongly formated payload
+                        status: 400
+                        detail: Wrong content payload
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        "401":
+          description: Not authorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 72D
+                        title: Not authorized
+                        status: 401
+                        detail: Authentication credentials were not provided or are invalid
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        "403":
+          description: Operation not allowed
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 12L
+                        title: Forbidden
+                        status: 403
+                        detail: Privileges of the token are insufficient to perform this action
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        "405":
+          description: Method not allowed for the specified resource (MethodNotAllowedException)
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 42R
+                        title: Method Not Allowed
+                        status: 405
+                        detail: Method not allowed for the specified resource
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        "413":
+          description: The payload for the body of the request is too large (RequestEntityTooLargeException)
+          headers:
+            Content-Type:
+              schema:
+                type: string
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 42R
+                        title: Request Entity Too Large
+                        status: 413
+                        detail: The payload for the body of the request is too large
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        "429":
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      - code: 13L
+                        title: Too many requests
+                        status: 429
+                        detail: You reached your request limits
+                        instance: /communications/6090146f-1023-4f7c-8eed-10a045d37ae8
+        default:
+          description: General error occured
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: ./models/Problems.yaml
+      operationId: createCommunication
+      x-stoplight:
+        id: 079tssr789dor
+      description: Creates communication based on existing and active communication_definition_name in RapidCX
+      parameters:
+        - $ref: "#/components/parameters/Content-Type"
+      requestBody:
+        description: Create communication request body structure
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/EmailCommunicationBody"
+                - $ref: "#/components/schemas/PDFCommunicationBody"
+                  x-stoplight:
+                    id: c2w63lgkx8kt6
+                - $ref: "#/components/schemas/SMSCommunicationBody"
+                  x-stoplight:
+                    id: 2rd1bw72u2ige
+            examples:
+              Example 1:
+                value:
+                  communication_definition_name: Bank letter email communication definition 37894
+                  document_type: letters
+                  communication_type: EMAIL_COMMUNICATION
+                  recipient_email_address: mikeappleseed@precisely.com
+                  recipient_email_to_name: Mike Appleseed
+                  communication_data:
+                    - key: Customer Name
+                      value: Mike Appleseed
+                    - key: Account Type
+                      value: standard
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 55555555
+              Example 2:
+                value:
+                  communication_definition_name: Bank statement email communication definition 65362
+                  document_type: statements
+                  communication_type: EMAIL_COMMUNICATION
+                  recipient_email_address: johndoe@precisely.com
+                  recipient_email_to_name: John Doe
+                  communication_data:
+                    - key: Customer Name
+                      value: John Doe
+                    - key: Account Type
+                      value: gold
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 66666666
+              Example 3:
+                value:
+                  communication_definition_name: Bank letter pdf communication definition 43627
+                  document_type: letters
+                  communication_type: PDF_COMMUNICATION
+                  pdf_delivery_method: PRINT
+                  communication_data:
+                    - key: Customer Name
+                      value: John Doe
+                    - key: Account Type
+                      value: standard
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 55555555
+                    - key: Address 1
+                      value: 73 Old Edinburgh Road
+                    - key: City
+                      value: Belfast
+                    - key: Post Code
+                      value: BT1 3ZQ
+                    - key: Country
+                      value: United Kingdom
+                    - key: SLA
+                      value: "1"
+                    - key: Environment Code
+                      value: P
+                    - key: Duplex
+                      value: "Y"
+                    - key: Colored
+                      value: "Y"
+                    - key: Std Membership Id
+                      value: "67432"
+                    - key: Envelope Code
+                      value: AEID025
+                    - key: Post Class
+                      value: Whistl
+              Example 4:
+                value:
+                  communication_definition_name: Bank statement pdf communication definition 75362
+                  document_type: statements
+                  communication_type: PDF_COMMUNICATION
+                  pdf_delivery_method: PRINT
+                  communication_data:
+                    - key: Customer Name
+                      value: Mike Appleseed
+                    - key: Account Type
+                      value: silver
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 77777777
+                    - key: Address 1
+                      value: 73 Old Edinburgh Road
+                    - key: City
+                      value: Belfast
+                    - key: Post Code
+                      value: BT1 3ZQ
+                    - key: Country
+                      value: United Kingdom
+                    - key: SLA
+                      value: "1"
+                    - key: Environment Code
+                      value: P
+                    - key: Duplex
+                      value: "Y"
+                    - key: Colored
+                      value: "N"
+                    - key: Std Membership Id
+                      value: "78745"
+                    - key: Envelope Code
+                      value: AEID025
+                    - key: Post Class
+                      value: Whistl
+              Example 5:
+                value:
+                  communication_definition_name: Bank statement SMS communication definition 78534
+                  document_type: statements
+                  communication_type: SMS_COMMUNICATION
+                  recipient_phone_number: +44 999888777
+                  communication_data_definitions:
+                    - key: Customer Name
+                      value: John Doe
+                    - key: Account Type
+                      value: standard
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 54666666
+              Example 6:
+                value:
+                  communication_definition_name: Bank letter SMS communication definition 34355
+                  document_type: letters
+                  communication_type: SMS_COMMUNICATION
+                  recipient_phone_number: +44 776455366
+                  communication_data_definitions:
+                    - key: Customer Name
+                      value: Mike Spencer
+                    - key: Account Type
+                      value: gold
+                    - key: Account Number
+                      value: GB 55 BUKB 200415 66666666
+    parameters:
+      - $ref: "#/components/parameters/RapidCX-Api-Version"
+components:
+  schemas:
+    DocumentCreatedResponse:
+      title: DocumentCreatedResponse
+      x-stoplight:
+        id: 1m6vp0nti15g2
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 1un77btvbbjmv
+          format: uuid
+          x-faker: datatype.uuid
+          example: e2b5d3d9-8e08-4459-b6c5-dc7a5118a3d9
+          description: The uuid of the communications created.
+    CommonCommunicationBody:
+      title: ""
+      x-stoplight:
+        id: w6wjeregmzh7i
+      type: object
+      required:
+        - communication_definition_name
+        - document_type
+        - communication_type
+      properties:
+        communication_definition_name:
+          type: string
+          x-stoplight:
+            id: njrjlpje4adso
+          description: The unique name of the communication definition object created in RapidCX
+          example: business letter 0001
+        document_type:
+          type: string
+          x-stoplight:
+            id: bojpimqqrrltn
+          example: letter
+          description: "The category of the document being created (e.g., letters, statements, claims)"
+        communication_type:
+          x-stoplight:
+            id: k4fgdf57l74jk
+          enum:
+            - EMAIL_COMMUNICATION
+            - PDF_COMMUNICATION
+            - SMS_COMMUNICATION
+          description: The type of communication created
+        communication_data:
+          type: array
+          x-stoplight:
+            id: pd8xam6pdbtpq
+          description: A key-value dictionary of all the data used in the communication definition object
+          items:
+            x-stoplight:
+              id: 7h7d2sj4r3ork
+            type: object
+            properties:
+              key:
+                type: string
+                x-stoplight:
+                  id: 50qlggk8ht03d
+                description: The name of the data field
+              value:
+                type: string
+                x-stoplight:
+                  id: qfqfsml9jphfn
+                description: The value of the data field
+      examples:
+        - communication_definition_name: business letter 0001
+          document_type: letter
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            - key: Customer Name
+              value: Mike Appleseed
+            - key: Account Type
+              value: standard
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+        - communication_definition_name: bank statement 6743
+          document_type: statements
+          communication_type: PDF_COMMUNICATION
+          communication_data:
+            - key: Customer Name
+              value: John Doe
+            - key: Account Type
+              value: silver
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+    EmailCommunicationBody:
+      x-stoplight:
+        id: dodn8lqe1a9ss
+      allOf:
+        - $ref: "#/components/schemas/CommonCommunicationBody"
+          x-stoplight:
+            id: u5u4djb3bc468
+        - type: object
+          required:
+            - recipient_email_address
+            - recipient_email_to_name
+          properties:
+            recipient_email_address:
+              type: string
+              x-stoplight:
+                id: m91dyj05mfe7x
+              description: The email address of the communication's recipient
+              example: johndoe@yprecisely.com
+            recipient_email_to_name:
+              type: string
+              x-stoplight:
+                id: thpo545xm2pry
+              example: John Doe
+              description: "The recipient's name, as used in the communication's body"
+      examples:
+        - communication_definition_name: string
+          document_type: string
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            - key: string
+              value: string
+          recipient_email_address: string
+          recipient_email_to_name: string
+    SMSCommunicationBody:
+      x-stoplight:
+        id: gh4dorsz8cpbj
+      allOf:
+        - $ref: "#/components/schemas/CommonCommunicationBody"
+          x-stoplight:
+            id: oxtllv2be0f8c
+        - type: object
+          required:
+            - recipient_phone_number
+          properties:
+            recipient_phone_number:
+              type: string
+              x-stoplight:
+                id: z77sxbzk0vu8e
+              description: The recipient phone number in full international format. +country_code area_code phone_number
+              example: +44 20 7183 8750
+      examples:
+        - communication_definition_name: business letter 0001
+          document_type: letter
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            - key: string
+              value: string
+          recipient_phone_number: +44 20 7183 8750
+    PDFCommunicationBody:
+      x-stoplight:
+        id: mqjzmkd9o40f1
+      allOf:
+        - $ref: "#/components/schemas/CommonCommunicationBody"
+          x-stoplight:
+            id: fq5omqhqvnem9
+        - type: object
+          x-stoplight:
+            id: 4ako3twrl9l4a
+          required:
+            - pdf_delivery_method
+          properties:
+            pdf_delivery_method:
+              x-stoplight:
+                id: pu1zcm36zdhs6
+              enum:
+                - PRINT
+                - NONE
+              description: The way the pdf will ne delivered to the recipient
+      examples:
+        - communication_definition_name: business letter 0001
+          document_type: letter
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            - key: string
+              value: string
+          pdf_delivery_method: PRINT
+  securitySchemes:
+    Authorization:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ""
+          tokenUrl: ""
+          refreshUrl: ""
+          scopes: {}
+  parameters:
+    RapidCX-Api-Version:
+      name: RapidCX-Api-Version
+      in: header
+      required: false
+      schema:
+        type: string
+      description: The API version
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Indicates the format of the request body being sent.
+    Accept:
+      name: Accept
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Specifies the format in which the client expects a response
+tags:
+  - name: Communications
+    description: The category of an API
