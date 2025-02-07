@@ -590,7 +590,7 @@ components:
           scopes:
             read: read-only
             read-write: read-write
-      description: |-
+      description: |+
         Bearer token required for authentication and authorization.
 
         Token portal: https://tokens.developer.rapidcx.engageone.co/
