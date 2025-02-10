@@ -8,8 +8,7 @@ properties:
     x-stoplight:
       id: xpb9ltiirlb9b
     items:
-      #$ref: 'https://opensource.zalando.com/restful-api-guidelines/money-1.0.0.yaml'
-      $ref: 'https://api-models.developer.preprod.rapidcx.engageone.co/Problem.yaml'
+      $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problem.yaml'
       x-stoplight:
         id: 64e0cwdce2l5a
 examples:

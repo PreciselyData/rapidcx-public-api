@@ -50,7 +50,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           examples:
             Example 1:
               value:
@@ -78,7 +78,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           examples:
             Example 1:
               value:
@@ -98,7 +98,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           examples:
             Example 1:
               value:
@@ -118,7 +118,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           examples:
             Example 1:
               value:
@@ -144,7 +144,7 @@ components:
           scopes:
             read: read-only
             read-write: read-write
-      description: |+
+      description: |-
         Bearer token required for authentication and authorization.
 
         Token portal: https://tokens.developer.rapidcx.engageone.co/
@@ -253,7 +253,10 @@ openapi: 3.1.1
 paths:
   /archives/files:
     post:
-      description: Creates and uploads file with it's attributes into RapidCX platform.
+      description: |-
+        Creates and uploads file with it's attributes into RapidCX platform.
+
+        This endpoint does not support mock capabilities.
       operationId: createDocument
       parameters:
         - in: header
@@ -357,7 +360,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
               examples:
                 Example 1:
                   value:
@@ -372,7 +375,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           headers:
             Content-Type:
               schema:
@@ -478,7 +481,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
       operationId: searchFiles
       x-stoplight:
         id: ryle4ursqqdts
@@ -564,7 +567,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
               examples:
                 Example 1:
                   value:
@@ -579,7 +582,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
           headers:
             Content-Type:
               schema:
@@ -609,7 +612,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
       operationId: deleteFile
       x-stoplight:
         id: ww56k49ev6r4w
@@ -640,7 +643,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
       operationId: modifyFileAttributes
       x-stoplight:
         id: r00oiu0k4i3mj
@@ -719,7 +722,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems.yaml'
       operationId: getFileAttributes
       x-stoplight:
         id: 7brk5nvkikf00
