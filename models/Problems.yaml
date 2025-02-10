@@ -8,7 +8,7 @@ properties:
     x-stoplight:
       id: xpb9ltiirlb9b
     items:
-      $ref: ./Problem.yaml
+      $ref: 'https://public-api-preprod-models.s3.us-east-1.amazonaws.com/Problem.yaml'
       x-stoplight:
         id: 64e0cwdce2l5a
 examples:
