@@ -312,10 +312,8 @@ paths:
                     - key: uploaded
                       value: 11-12-2024
             encoding:
-              file:
+              file_payload:
                 contentType: application/octet-stream
-              description:
-                contentType: text/plain
         required: true
         description: 'File body structure '
       responses:
@@ -489,9 +487,6 @@ paths:
         Allows to search for documents by certain creteria.
 
         Search endpoint uses Lucene syntax. Supported operations are described in [article](https://gitlab.com/preciselydata/engageone/rapid-cx/pocs/poc-rapidcx-group/public-api-rapidcx/-/blob/main/docs/Archiver-Search-Request-Syntax.md?ref_type=heads)
-      requestBody:
-        content: {}
-        description: ''
       parameters:
         - schema:
             type: string
