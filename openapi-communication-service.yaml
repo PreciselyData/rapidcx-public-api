@@ -262,7 +262,7 @@ paths:
                   communication_definition_name: Bank statement SMS communication definition 78534
                   document_type: statements
                   communication_type: SMS_COMMUNICATION
-                  recipient_phone_number: +44 999888777
+                  recipient_phone_number: '+44999888777'
                   communication_data:
                     - key: Customer Name
                       value: John Doe
@@ -275,7 +275,7 @@ paths:
                   communication_definition_name: Bank letter SMS communication definition 34355
                   document_type: letters
                   communication_type: SMS_COMMUNICATION
-                  recipient_phone_number: +44 776455366
+                  recipient_phone_number: '+44776455366'
                   communication_data:
                     - key: Customer Name
                       value: Mike Spencer
@@ -591,7 +591,8 @@ components:
               x-stoplight:
                 id: z77sxbzk0vu8e
               description: The recipient phone number in full international E.164 format with no blank characters.
-              example: +44 20 7183 8750
+              example: '+442071838750'
+              pattern: '^\+[1-9]\d{1,14}$'
       examples:
         - communication_definition_name: business letter 0001
           document_type: letter
