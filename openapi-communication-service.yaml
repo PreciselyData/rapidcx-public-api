@@ -153,11 +153,11 @@ paths:
                   x-stoplight:
                     id: 2rd1bw72u2ige
               discriminator:
-                  propertyName: communication_type
-                  mapping:
-                    EMAIL_COMMUNICATION: '#/components/schemas/EmailCommunicationBody'
-                    PDF_COMMUNICATION: '#/components/schemas/PDFCommunicationBody'
-                    SMS_COMMUNICATION: '#/components/schemas/SMSCommunicationBody'
+                propertyName: communication_type
+                mapping:
+                  EMAIL_COMMUNICATION: '#/components/schemas/EmailCommunicationBody'
+                  PDF_COMMUNICATION: '#/components/schemas/PDFCommunicationBody'
+                  SMS_COMMUNICATION: '#/components/schemas/SMSCommunicationBody'
             examples:
               email communication example 1:
                 value:
@@ -263,7 +263,7 @@ paths:
                   document_type: statements
                   communication_type: SMS_COMMUNICATION
                   recipient_phone_number: +44 999888777
-                  communication_data_definitions:
+                  communication_data:
                     - key: Customer Name
                       value: John Doe
                     - key: Account Type
@@ -276,7 +276,7 @@ paths:
                   document_type: letters
                   communication_type: SMS_COMMUNICATION
                   recipient_phone_number: +44 776455366
-                  communication_data_definitions:
+                  communication_data:
                     - key: Customer Name
                       value: Mike Spencer
                     - key: Account Type
@@ -485,6 +485,8 @@ components:
         - communication_definition_name: business letter 0001
           document_type: letter
           communication_type: EMAIL_COMMUNICATION
+          recipient_email_address: mikeappleseed@precisely.com
+          recipient_email_to_name: Mike Appleseed
           communication_data:
             - key: Customer Name
               value: Mike Appleseed
@@ -495,11 +497,45 @@ components:
         - communication_definition_name: bank statement 6743
           document_type: statements
           communication_type: PDF_COMMUNICATION
+          pdf_delivery_method: PRINT
           communication_data:
             - key: Customer Name
               value: John Doe
             - key: Account Type
-              value: silver
+              value: standard
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+            - key: Address 1
+              value: 73 Old Edinburgh Road
+            - key: City
+              value: Belfast
+            - key: Post Code
+              value: BT1 3ZQ
+            - key: Country
+              value: United Kingdom
+            - key: SLA
+              value: '1'
+            - key: Environment Code
+              value: P
+            - key: Duplex
+              value: 'Y'
+            - key: Colored
+              value: 'Y'
+            - key: Std Membership Id
+              value: '67432'
+            - key: Envelope Code
+              value: AEID025
+            - key: Post Class
+              value: Whistl
+        - communication_definition_name: business letter 0001
+          document_type: letter
+          communication_type: SMS_COMMUNICATION
+          recipient_phone_number: '+44776455366'
+          communication_data:
+            - key: Customer Name
+              value: Mike Appleseed
+            - key: Account Type
+              value: standard
             - key: Account Number
               value: GB 55 BUKB 200415 55555555
     EmailCommunicationBody:
@@ -527,14 +563,18 @@ components:
               example: John Doe
               description: 'The recipient''s name, as used in the communication''s body'
       examples:
-        - communication_definition_name: string
-          document_type: string
+        - communication_definition_name: Bank letter email communication definition 37894
+          document_type: letters
           communication_type: EMAIL_COMMUNICATION
           communication_data:
-            - key: string
-              value: string
-          recipient_email_address: string
-          recipient_email_to_name: string
+            - key: Customer Name
+              value: Mike Appleseed
+            - key: Account Type
+              value: standard
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+          recipient_email_address: stmikeappleseed@precisely.coming
+          recipient_email_to_name: Mike Appleseed
     SMSCommunicationBody:
       x-stoplight:
         id: gh4dorsz8cpbj
@@ -550,16 +590,20 @@ components:
               type: string
               x-stoplight:
                 id: z77sxbzk0vu8e
-              description: The recipient phone number in full international format. +country_code area_code phone_number
+              description: The recipient phone number in full international E.164 format with no blank characters.
               example: +44 20 7183 8750
       examples:
         - communication_definition_name: business letter 0001
           document_type: letter
-          communication_type: EMAIL_COMMUNICATION
+          communication_type: SMS_COMMUNICATION
           communication_data:
-            - key: string
-              value: string
-          recipient_phone_number: +44 20 7183 8750
+            - key: Customer Name
+              value: Mike Appleseed
+            - key: Account Type
+              value: standard
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+          recipient_phone_number: '+442071838750'
     PDFCommunicationBody:
       x-stoplight:
         id: mqjzmkd9o40f1
@@ -576,8 +620,7 @@ components:
             pdf_delivery_method:
               x-stoplight:
                 id: pu1zcm36zdhs6
-              type:
-                string
+              type: string
               x-extensible-enum:
                 - PRINT
                 - NONE
@@ -585,10 +628,36 @@ components:
       examples:
         - communication_definition_name: business letter 0001
           document_type: letter
-          communication_type: EMAIL_COMMUNICATION
+          communication_type: PDF_COMMUNICATION
           communication_data:
-            - key: string
-              value: string
+            - key: Customer Name
+              value: John Doe
+            - key: Account Type
+              value: standard
+            - key: Account Number
+              value: GB 55 BUKB 200415 55555555
+            - key: Address 1
+              value: 73 Old Edinburgh Road
+            - key: City
+              value: Belfast
+            - key: Post Code
+              value: BT1 3ZQ
+            - key: Country
+              value: United Kingdom
+            - key: SLA
+              value: '1'
+            - key: Environment Code
+              value: P
+            - key: Duplex
+              value: 'Y'
+            - key: Colored
+              value: 'Y'
+            - key: Std Membership Id
+              value: '67432'
+            - key: Envelope Code
+              value: AEID025
+            - key: Post Class
+              value: Whistl
           pdf_delivery_method: PRINT
   securitySchemes:
     Authorization:
