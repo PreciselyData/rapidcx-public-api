@@ -430,8 +430,9 @@ components:
           x-faker: datatype.uuid
           example: e2b5d3d9-8e08-4459-b6c5-dc7a5118a3d9
           description: The uuid of the communications created.
+      description: ''
     CommonCommunicationBody:
-      title: ''
+      title: CommonCommunication
       x-stoplight:
         id: w6wjeregmzh7i
       type: object
@@ -538,6 +539,7 @@ components:
               value: standard
             - key: Account Number
               value: GB 55 BUKB 200415 55555555
+      description: CommonCommunication model
     EmailCommunicationBody:
       x-stoplight:
         id: dodn8lqe1a9ss
@@ -575,6 +577,8 @@ components:
               value: GB 55 BUKB 200415 55555555
           recipient_email_address: stmikeappleseed@precisely.coming
           recipient_email_to_name: Mike Appleseed
+      description: EmailCommunication model
+      title: EmailCommunication
     SMSCommunicationBody:
       x-stoplight:
         id: gh4dorsz8cpbj
@@ -605,6 +609,8 @@ components:
             - key: Account Number
               value: GB 55 BUKB 200415 55555555
           recipient_phone_number: '+442071838750'
+      description: SMSCommunication model
+      title: SMSCommunication
     PDFCommunicationBody:
       x-stoplight:
         id: mqjzmkd9o40f1
@@ -660,6 +666,8 @@ components:
             - key: Post Class
               value: Whistl
           pdf_delivery_method: PRINT
+      description: PDFCommunication model
+      title: PDFCommunication
   securitySchemes:
     Authorization:
       type: oauth2
