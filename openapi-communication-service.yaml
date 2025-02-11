@@ -144,12 +144,20 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/EmailCommunicationBody'
+                  x-stoplight:
+                    id: nxw4iqic20qw1
                 - $ref: '#/components/schemas/PDFCommunicationBody'
                   x-stoplight:
                     id: c2w63lgkx8kt6
                 - $ref: '#/components/schemas/SMSCommunicationBody'
                   x-stoplight:
                     id: 2rd1bw72u2ige
+              discriminator:
+                  propertyName: communication_type
+                  mapping:
+                    EMAIL_COMMUNICATION: '#/components/schemas/EmailCommunicationBody'
+                    PDF_COMMUNICATION: '#/components/schemas/PDFCommunicationBody'
+                    SMS_COMMUNICATION: '#/components/schemas/SMSCommunicationBody'
             examples:
               email communication example 1:
                 value:
@@ -447,7 +455,8 @@ components:
         communication_type:
           x-stoplight:
             id: k4fgdf57l74jk
-          enum:
+          type: string
+          x-extensible-enum:
             - EMAIL_COMMUNICATION
             - PDF_COMMUNICATION
             - SMS_COMMUNICATION
@@ -567,7 +576,9 @@ components:
             pdf_delivery_method:
               x-stoplight:
                 id: pu1zcm36zdhs6
-              enum:
+              type:
+                string
+              x-extensible-enum:
                 - PRINT
                 - NONE
               description: The way the pdf will ne delivered to the recipient
