@@ -631,7 +631,7 @@ components:
               x-extensible-enum:
                 - PRINT
                 - NONE
-              description: The way the pdf will ne delivered to the recipient
+              description: The way the pdf will be delivered to the recipient
       examples:
         - communication_definition_name: business letter 0001
           document_type: letter
