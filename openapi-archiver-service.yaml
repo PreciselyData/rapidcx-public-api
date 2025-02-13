@@ -234,12 +234,12 @@ components:
       schema:
         type: string
         format: date
-        default: '2025-01-23'
-        example: '2025-01-23'
+        default: '2025-02-13'
+        example: '2025-02-13'
       description: The API version
 info:
   title: Rapid CX Archiver API
-  version: '2025-01-23'
+  version: '2025-02-13'
   description: This specification describes the Archiver API of the EngageOne RapidCX Platform.
   contact:
     name: Preciesly
