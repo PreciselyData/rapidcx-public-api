@@ -129,7 +129,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: ./models/Problems.yaml
+                $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
       operationId: createCommunication
       x-stoplight:
         id: 079tssr789dor
@@ -292,7 +292,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
@@ -313,7 +313,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
@@ -334,7 +334,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
@@ -355,7 +355,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
@@ -376,7 +376,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
@@ -397,7 +397,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: ./models/Problems.yaml
+            $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problems-1.0.0.yaml'
           examples:
             Example 1:
               value:
