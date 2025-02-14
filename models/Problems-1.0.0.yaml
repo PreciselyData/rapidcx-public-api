@@ -8,7 +8,7 @@ properties:
     x-stoplight:
       id: xpb9ltiirlb9b
     items:
-      $ref: ./Problem.yaml
+      $ref: 'https://raw.githubusercontent.com/PreciselyData/rapidcx-public-api/refs/heads/main/models/Problem-1.0.0.yaml'
       x-stoplight:
         id: 64e0cwdce2l5a
 examples:
