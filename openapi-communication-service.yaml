@@ -429,6 +429,14 @@ components:
         id: w6wjeregmzh7i
       type: object
       description: CommonCommunication model
+      examples:
+        - communication_definition_name: business letter 4653
+          document_type: letter
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            Customer Name: Jake Olson
+            Account Type: Silver
+            Account Number: GB 55 BUKB 200415 64372438
       required:
         - communication_definition_name
         - document_type
@@ -449,8 +457,7 @@ components:
         communication_type:
           x-stoplight:
             id: k4fgdf57l74jk
-          type: string
-          x-extensible-enum:
+          enum:
             - EMAIL_COMMUNICATION
             - PDF_COMMUNICATION
             - SMS_COMMUNICATION
@@ -463,14 +470,6 @@ components:
           additionalProperties:
             x-stoplight:
               id: 4bnt65ojkxvnn
-      examples:
-        - communication_definition_name: business letter 4653
-          document_type: letter
-          communication_type: EMAIL_COMMUNICATION
-          communication_data:
-            Customer Name: Jake Olson
-            Account Type: Silver
-            Account Number: GB 55 BUKB 200415 64372438
     EmailCommunicationBody:
       x-stoplight:
         id: dodn8lqe1a9ss
