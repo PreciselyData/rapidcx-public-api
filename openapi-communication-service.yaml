@@ -159,130 +159,120 @@ paths:
                   PDF_COMMUNICATION: '#/components/schemas/PDFCommunicationBody'
                   SMS_COMMUNICATION: '#/components/schemas/SMSCommunicationBody'
             examples:
-              email communication example 1:
+              Ex1 email communication:
                 value:
                   communication_definition_name: Bank letter email communication definition 37894
                   document_type: letters
                   communication_type: EMAIL_COMMUNICATION
-                  recipient_email_address: mikeappleseed@precisely.com
-                  recipient_email_to_name: Mike Appleseed
                   communication_data:
-                    - key: Customer Name
-                      value: Mike Appleseed
-                    - key: Account Type
-                      value: standard
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 55555555
-              email communication example 2:
+                    Customer Name: Jake Olson
+                    Account Type: Silver
+                    Account Number: GB 55 BUKB 200415 64372438
+                  recipients:
+                    - type: MAIL_TO
+                      address: jake.olson@somecompany.co.uk
+                      name: Jake Olson
+                    - type: MAIL_CC
+                      address: cc1@homebanking.co.uk
+                      name: Home Banking (CC)
+                    - type: MAIL_BCC
+                      address: bcc1@homebanking.co.uk
+                      name: Home Banking (BCC)
+              Ex2 email communication:
                 value:
                   communication_definition_name: Bank statement email communication definition 65362
                   document_type: statements
                   communication_type: EMAIL_COMMUNICATION
-                  recipient_email_address: johndoe@precisely.com
-                  recipient_email_to_name: John Doe
                   communication_data:
-                    - key: Customer Name
-                      value: John Doe
-                    - key: Account Type
-                      value: gold
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 66666666
-              pdf communication example 1:
+                    Customer Name: John Mike Doe
+                    Account Type: Standard
+                    Account Number: GB 55 BUKB 200415 66666666
+                  recipients:
+                    - type: MAIL_TO
+                      address: john.doe@someothercompany.co.uk
+                      name: John Mike Doe
+                    - type: MAIL_TO
+                      address: johndoe@gmail.com
+                      name: John Mike Doe at Gmail
+                    - type: MAIL_CC
+                      address: cc1@homebanking.co.uk
+                    - type: MAIL_CC
+                      address: cc2@homebanking.co.uk
+                      name: Home Banking (CC)
+                    - type: MAIL_BCC
+                      address: bcc1@homebanking.co.uk
+                      name: Home Banking (BCC)
+                    - type: MAIL_BCC
+                      address: bcc2@homebanking.co.uk
+              Ex3 pdf communication:
                 value:
                   communication_definition_name: Bank letter pdf communication definition 43627
                   document_type: letters
                   communication_type: PDF_COMMUNICATION
-                  pdf_delivery_method: PRINT
                   communication_data:
-                    - key: Customer Name
-                      value: John Doe
-                    - key: Account Type
-                      value: standard
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 55555555
-                    - key: Address 1
-                      value: 73 Old Edinburgh Road
-                    - key: City
-                      value: Belfast
-                    - key: Post Code
-                      value: BT1 3ZQ
-                    - key: Country
-                      value: United Kingdom
-                    - key: SLA
-                      value: '1'
-                    - key: Environment Code
-                      value: P
-                    - key: Duplex
-                      value: 'Y'
-                    - key: Colored
-                      value: 'Y'
-                    - key: Std Membership Id
-                      value: '67432'
-                    - key: Envelope Code
-                      value: AEID025
-                    - key: Post Class
-                      value: Whistl
-              pdf communication example 2:
+                    Customer Name: Jake Olson
+                    Account Type: Silver
+                    Account Number: GB 55 BUKB 200415 64372438
+                    Standard Membership Id: '67432'
+                    SLA: '1'
+                    Environment Code: P
+                    Duplex: 'Y'
+                    Colored: 'N'
+                    Envelope Code: AEID025
+                    Post Class: Whistl
+                  recipients:
+                    - name: Jake Olson
+                      address_line1: 73 Old Edinburgh Road
+                      city: Belfast
+                      post_code: BT1 3ZQ
+                      country: United Kingdom
+              Ex4 pdf communication:
                 value:
                   communication_definition_name: Bank statement pdf communication definition 75362
                   document_type: statements
                   communication_type: PDF_COMMUNICATION
-                  pdf_delivery_method: PRINT
                   communication_data:
-                    - key: Customer Name
-                      value: Mike Appleseed
-                    - key: Account Type
-                      value: silver
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 77777777
-                    - key: Address 1
-                      value: 73 Old Edinburgh Road
-                    - key: City
-                      value: Belfast
-                    - key: Post Code
-                      value: BT1 3ZQ
-                    - key: Country
-                      value: United Kingdom
-                    - key: SLA
-                      value: '1'
-                    - key: Environment Code
-                      value: P
-                    - key: Duplex
-                      value: 'Y'
-                    - key: Colored
-                      value: 'N'
-                    - key: Std Membership Id
-                      value: '78745'
-                    - key: Envelope Code
-                      value: AEID025
-                    - key: Post Class
-                      value: Whistl
-              sms communication example 1:
+                    Customer Name: Mike Appleseed
+                    Account Type: Standard
+                    Account Number: GB 55 BUKB 200415 77777777
+                    Standard Membership Id: '67432'
+                    SLA: '1'
+                    Environment Code: P
+                    Duplex: 'Y'
+                    Colored: 'N'
+                    Envelope Code: AEID025
+                    Post Class: Whistl
+                    Insert 1: HUC025
+                    Tray 2 Code: Batch Header Paper
+                    Tray 3 Code: HUC023
+                  recipients:
+                    - name: Mike Appleseed
+                      address_line1: 73 Old Edinburgh Road
+                      city: Belfast
+                      post_code: BT1 3ZQ
+                      country: United Kingdom
+              Ex5 SMS communication:
+                value:
+                  communication_definition_name: Insurance letter SMS communication definition 6372
+                  document_type: letters
+                  communication_type: SMS_COMMUNICATION
+                  communication_data:
+                    Customer Name: Jake Downhill
+                    Account Type: Silver
+                    Account Number: GB 55 BUKB 200415 64372438
+                  recipients:
+                    - phone_number: '+442071838750'
+              Ex6 SMS communication:
                 value:
                   communication_definition_name: Bank statement SMS communication definition 78534
                   document_type: statements
                   communication_type: SMS_COMMUNICATION
-                  recipient_phone_number: '+44999888777'
                   communication_data:
-                    - key: Customer Name
-                      value: John Doe
-                    - key: Account Type
-                      value: standard
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 54666666
-              sms communication example 2:
-                value:
-                  communication_definition_name: Bank letter SMS communication definition 34355
-                  document_type: letters
-                  communication_type: SMS_COMMUNICATION
-                  recipient_phone_number: '+44776455366'
-                  communication_data:
-                    - key: Customer Name
-                      value: Mike Spencer
-                    - key: Account Type
-                      value: gold
-                    - key: Account Number
-                      value: GB 55 BUKB 200415 66666666
+                    Customer Name: Mike Spencer
+                    Account Type: Silver
+                    Account Number: GB 55 BUKB 200415 64372438
+                  recipients:
+                    - phone_number: '+442071356476'
     parameters:
       - $ref: '#/components/parameters/RapidCX-Api-Version'
 components:
@@ -430,12 +420,15 @@ components:
           x-faker: datatype.uuid
           example: e2b5d3d9-8e08-4459-b6c5-dc7a5118a3d9
           description: The uuid of the communications created.
-      description: ''
+      description: DocumentCreated response body
+      examples:
+        - id: e2b5d3d9-8e08-4459-b6c5-dc7a5118a3d9
     CommonCommunicationBody:
       title: CommonCommunication
       x-stoplight:
         id: w6wjeregmzh7i
       type: object
+      description: CommonCommunication model
       required:
         - communication_definition_name
         - document_type
@@ -463,83 +456,21 @@ components:
             - SMS_COMMUNICATION
           description: The type of communication created
         communication_data:
-          type: array
           x-stoplight:
-            id: pd8xam6pdbtpq
-          description: A key-value dictionary of all the data used in the communication definition object
-          items:
+            id: 80wt89d4enr3b
+          type: object
+          description: 'A map<string, any> of all the data used in the communication_definition object. The key must be a ''string'' while the value can be any valid JSON object'
+          additionalProperties:
             x-stoplight:
-              id: 7h7d2sj4r3ork
-            type: object
-            properties:
-              key:
-                type: string
-                x-stoplight:
-                  id: 50qlggk8ht03d
-                description: The name of the data field
-              value:
-                type: string
-                x-stoplight:
-                  id: qfqfsml9jphfn
-                description: The value of the data field
+              id: 4bnt65ojkxvnn
       examples:
-        - communication_definition_name: business letter 0001
+        - communication_definition_name: business letter 4653
           document_type: letter
           communication_type: EMAIL_COMMUNICATION
-          recipient_email_address: mikeappleseed@precisely.com
-          recipient_email_to_name: Mike Appleseed
           communication_data:
-            - key: Customer Name
-              value: Mike Appleseed
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-        - communication_definition_name: bank statement 6743
-          document_type: statements
-          communication_type: PDF_COMMUNICATION
-          pdf_delivery_method: PRINT
-          communication_data:
-            - key: Customer Name
-              value: John Doe
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-            - key: Address 1
-              value: 73 Old Edinburgh Road
-            - key: City
-              value: Belfast
-            - key: Post Code
-              value: BT1 3ZQ
-            - key: Country
-              value: United Kingdom
-            - key: SLA
-              value: '1'
-            - key: Environment Code
-              value: P
-            - key: Duplex
-              value: 'Y'
-            - key: Colored
-              value: 'Y'
-            - key: Std Membership Id
-              value: '67432'
-            - key: Envelope Code
-              value: AEID025
-            - key: Post Class
-              value: Whistl
-        - communication_definition_name: business letter 0001
-          document_type: letter
-          communication_type: SMS_COMMUNICATION
-          recipient_phone_number: '+44776455366'
-          communication_data:
-            - key: Customer Name
-              value: Mike Appleseed
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-      description: CommonCommunication model
+            Customer Name: Jake Olson
+            Account Type: Silver
+            Account Number: GB 55 BUKB 200415 64372438
     EmailCommunicationBody:
       x-stoplight:
         id: dodn8lqe1a9ss
@@ -548,37 +479,69 @@ components:
           x-stoplight:
             id: u5u4djb3bc468
         - type: object
+          x-stoplight:
+            id: g713e3lt1fc3q
           required:
-            - recipient_email_address
-            - recipient_email_to_name
+            - recipients
           properties:
-            recipient_email_address:
-              type: string
+            recipients:
+              type: array
               x-stoplight:
-                id: m91dyj05mfe7x
-              description: The email address of the communication's recipient
-              example: johndoe@yprecisely.com
-            recipient_email_to_name:
-              type: string
-              x-stoplight:
-                id: thpo545xm2pry
-              example: John Doe
-              description: 'The recipient''s name, as used in the communication''s body'
-      examples:
-        - communication_definition_name: Bank letter email communication definition 37894
-          document_type: letters
-          communication_type: EMAIL_COMMUNICATION
-          communication_data:
-            - key: Customer Name
-              value: Mike Appleseed
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-          recipient_email_address: stmikeappleseed@precisely.coming
-          recipient_email_to_name: Mike Appleseed
+                id: mni4n09qjaceq
+              description: The list of the recipient to whom this email communication will be sent
+              items:
+                x-stoplight:
+                  id: ha4fbvpovyq1f
+                type: object
+                required:
+                  - type
+                  - address
+                properties:
+                  type:
+                    x-stoplight:
+                      id: 5u3tzct23ic4m
+                    enum:
+                      - MAIL_TO
+                      - MAIL_CC
+                      - MAIL_BCC
+                    description: The address type. Must be the one of the enumeratively defined values.
+                  address:
+                    type: string
+                    x-stoplight:
+                      id: okk691s8oe59p
+                    description: The recipient's email address
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: 9leu1j9x4i90p
+                    description: The recipient's full name
       description: EmailCommunication model
       title: EmailCommunication
+      examples:
+        - communication_definition_name: business letter 0001
+          document_type: letter
+          communication_type: EMAIL_COMMUNICATION
+          communication_data:
+            Customer Name: Mike Doe
+            Account Type: standard
+            Account Number: GB 55 BUKB 200415 55555555
+          recipients:
+            - type: MAIL_TO
+              address: mike.doe@acmecompany.com
+              name: Mike Doe
+            - type: MAIL_TO
+              address: mike.doe@gmail.com
+              name: Mike Doe at Gmail
+            - type: MAIL_CC
+              address: cc1@homebanking.co.uk
+            - type: MAIL_CC
+              address: cc2@homebanking.co.uk
+              name: Home Banking (CC)
+            - type: MAIL_BCC
+              address: bcc1@homebanking.co.uk
+              name: Home Banking (BCC)
+            - type: MAIL_BCC
+              address: bcc2@homebanking.co.uk
     SMSCommunicationBody:
       x-stoplight:
         id: gh4dorsz8cpbj
@@ -588,29 +551,39 @@ components:
             id: oxtllv2be0f8c
         - type: object
           required:
-            - recipient_phone_number
+            - recipients
           properties:
-            recipient_phone_number:
-              type: string
+            recipients:
+              type: array
               x-stoplight:
-                id: z77sxbzk0vu8e
-              description: The recipient phone number in full international E.164 format with no blank characters.
-              example: '+442071838750'
-              pattern: '^\+[1-9]\d{1,14}$'
+                id: rnwagovmd6jmq
+              description: The list of the recipient to whom this SMS communication will be sent
+              items:
+                x-stoplight:
+                  id: gm5t1keg5l5yt
+                type: object
+                required:
+                  - phone_number
+                properties:
+                  phone_number:
+                    type: string
+                    x-stoplight:
+                      id: 6bq94nmp116vj
+                    description: The recipient phone number in full international E.164 format with no blank characters.
+                    example: '+442071838750'
+                    pattern: '^\+[1-9]\d{1,14}$'
+      description: SMSCommunication model
+      title: SMSCommunication
       examples:
-        - communication_definition_name: business letter 0001
+        - communication_definition_name: business letter 1342
           document_type: letter
           communication_type: SMS_COMMUNICATION
           communication_data:
-            - key: Customer Name
-              value: Mike Appleseed
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-          recipient_phone_number: '+442071838750'
-      description: SMSCommunication model
-      title: SMSCommunication
+            Customer Name: Jake Olson
+            Account Type: Silver
+            Account Number: GB 55 BUKB 200415 64372438
+          recipients:
+            - phone_number: '+442071838750'
     PDFCommunicationBody:
       x-stoplight:
         id: mqjzmkd9o40f1
@@ -621,53 +594,81 @@ components:
         - type: object
           x-stoplight:
             id: 4ako3twrl9l4a
-          required:
-            - pdf_delivery_method
           properties:
-            pdf_delivery_method:
+            recipients:
+              type: array
               x-stoplight:
-                id: pu1zcm36zdhs6
-              type: string
-              x-extensible-enum:
-                - PRINT
-                - NONE
-              description: The way the pdf will be delivered to the recipient
+                id: u7elhctvitu3l
+              description: The list of the recipient to whom this PDF communication will be sent
+              items:
+                x-stoplight:
+                  id: evw48hz9agpzk
+                type: object
+                required:
+                  - name
+                  - address_line1
+                  - city
+                  - post_code
+                  - country
+                properties:
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: ni6whvlf2qwr7
+                    description: The Customer Full Name that will be printed
+                  address_line1:
+                    type: string
+                    x-stoplight:
+                      id: 9ykjxlfthofz0
+                    description: The first line of the address
+                  address_line2:
+                    type: string
+                    x-stoplight:
+                      id: gq4l68ykv3bms
+                    description: The second line of the address
+                  city:
+                    type: string
+                    x-stoplight:
+                      id: vqyxmg2ba9am7
+                    description: The City
+                  post_code:
+                    type: string
+                    x-stoplight:
+                      id: 9tha5mdy3wk4k
+                    description: The post code
+                  region:
+                    type: string
+                    x-stoplight:
+                      id: g0xl5n15djwi0
+                    description: The region
+                  country:
+                    type: string
+                    x-stoplight:
+                      id: at8c11so34fik
+                    description: The country
+      description: PDFCommunication model
+      title: PDFCommunication
       examples:
-        - communication_definition_name: business letter 0001
+        - communication_definition_name: business letter 4653
           document_type: letter
           communication_type: PDF_COMMUNICATION
           communication_data:
-            - key: Customer Name
-              value: John Doe
-            - key: Account Type
-              value: standard
-            - key: Account Number
-              value: GB 55 BUKB 200415 55555555
-            - key: Address 1
-              value: 73 Old Edinburgh Road
-            - key: City
-              value: Belfast
-            - key: Post Code
-              value: BT1 3ZQ
-            - key: Country
-              value: United Kingdom
-            - key: SLA
-              value: '1'
-            - key: Environment Code
-              value: P
-            - key: Duplex
-              value: 'Y'
-            - key: Colored
-              value: 'Y'
-            - key: Std Membership Id
-              value: '67432'
-            - key: Envelope Code
-              value: AEID025
-            - key: Post Class
-              value: Whistl
-          pdf_delivery_method: PRINT
-      description: PDFCommunication model
-      title: PDFCommunication
+            Customer Name: John Henry Doe
+            Account Type: Gold
+            Account Number: GB 55 BUKB 200415 64373562
+            Standard Membership Id: '67432'
+            SLA: '1'
+            Environment Code: P
+            Duplex: 'Y'
+            Colored: 'N'
+            Envelope Code: AEID025
+            Post Class: Whistl
+          recipients:
+            - name: John Henry Doe
+              address_line1: 73 Old Edinburgh Road
+              city: Belfast
+              post_code: BT1 3ZQ
+              country: United Kingdom
   securitySchemes:
     Authorization:
       type: oauth2
