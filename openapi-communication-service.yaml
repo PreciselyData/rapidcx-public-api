@@ -187,6 +187,19 @@ paths:
                     Customer Name: John Mike Doe
                     Account Type: Standard
                     Account Number: GB 55 BUKB 200415 66666666
+                    Printed Plastic Cards:
+                      Card Template: Custom plastic card template 1
+                      Cards:
+                        - Member Number: '647324'
+                          Title: Mr
+                          Full Name: John Doe
+                          Valid thru: 11/26
+                          Status: Gold
+                        - Member Number: '647325'
+                          Title: Ms
+                          Full Name: Sussane Doe
+                          Valid thru: 11/26
+                          Status: Gold
                   recipients:
                     - type: MAIL_TO
                       address: john.doe@someothercompany.co.uk
