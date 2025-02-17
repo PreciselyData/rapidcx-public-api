@@ -182,7 +182,6 @@ paths:
                     Account Type: Standard
                     Account Number: GB 55 BUKB 200415 66666666
                     Printed Plastic Cards:
-                      Card Template: Custom plastic card template 1
                       Cards:
                         - Member Number: '647324'
                           Title: Mr
