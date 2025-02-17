@@ -153,7 +153,7 @@ paths:
                   PDF_COMMUNICATION: '#/components/schemas/PDFCommunicationBody'
                   SMS_COMMUNICATION: '#/components/schemas/SMSCommunicationBody'
             examples:
-              Ex1 email communication:
+              Ex1 simple email communication:
                 value:
                   communication_definition_name: Bank letter email communication definition 37894
                   document_type: letters
@@ -172,7 +172,7 @@ paths:
                     - type: MAIL_BCC
                       address: bcc1@homebanking.co.uk
                       name: Home Banking (BCC)
-              Ex2 email communication:
+              Ex2 email communication with complex data:
                 value:
                   communication_definition_name: Bank statement email communication definition 65362
                   document_type: statements
@@ -210,7 +210,7 @@ paths:
                       name: Home Banking (BCC)
                     - type: MAIL_BCC
                       address: bcc2@homebanking.co.uk
-              Ex3 pdf communication:
+              Ex3 simple pdf communication:
                 value:
                   communication_definition_name: Bank letter pdf communication definition 43627
                   document_type: letters
@@ -230,9 +230,9 @@ paths:
                     - name: Jake Olson
                       address_line1: 73 Old Edinburgh Road
                       city: Belfast
-                      post_code: BT1 3ZQ
+                      postal_code: BT1 3ZQ
                       country: United Kingdom
-              Ex4 pdf communication:
+              Ex4 pdf communication with complex data:
                 value:
                   communication_definition_name: Bank statement pdf communication definition 75362
                   document_type: statements
@@ -251,13 +251,20 @@ paths:
                     Insert 1: HUC025
                     Tray 2 Code: Batch Header Paper
                     Tray 3 Code: HUC023
+                    Printed Plastic Cards:
+                      Cards:
+                        - Member Number: '63562'
+                          Title: Mr
+                          Full Name: Mike Appleseed
+                          Valid thru: 06/25
+                          Status: Regular
                   recipients:
                     - name: Mike Appleseed
                       address_line1: 73 Old Edinburgh Road
                       city: Belfast
-                      post_code: BT1 3ZQ
+                      postal_code: BT1 3ZQ
                       country: United Kingdom
-              Ex5 SMS communication:
+              Ex5 simple SMS communication:
                 value:
                   communication_definition_name: Insurance letter SMS communication definition 6372
                   document_type: letters
@@ -268,7 +275,7 @@ paths:
                     Account Number: GB 55 BUKB 200415 64372438
                   recipients:
                     - phone_number: '+442071838750'
-              Ex6 SMS communication:
+              Ex6 simple SMS communication:
                 value:
                   communication_definition_name: Bank statement SMS communication definition 78534
                   document_type: statements
@@ -672,7 +679,7 @@ components:
             - name: John Henry Doe
               address_line1: 73 Old Edinburgh Road
               city: Belfast
-              post_code: BT1 3ZQ
+              postal_code: BT1 3ZQ
               country: United Kingdom
   securitySchemes:
     Authorization:
