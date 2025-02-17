@@ -613,44 +613,44 @@ components:
                   - name
                   - address_line1
                   - city
-                  - post_code
+                  - postal_code
                   - country
                 properties:
                   name:
                     type: string
                     x-stoplight:
                       id: ni6whvlf2qwr7
-                    description: The Customer Full Name that will be printed
+                    description: 'The complete name of the recipient, typically including first name, last name, and any middle names or initials'
                   address_line1:
                     type: string
                     x-stoplight:
                       id: 9ykjxlfthofz0
-                    description: The first line of the address
+                    description: The primary street address or location of the entity
                   address_line2:
                     type: string
                     x-stoplight:
                       id: gq4l68ykv3bms
-                    description: The second line of the address
+                    description: 'The secondary street address or additional address details (e.g., apartment number)'
                   city:
                     type: string
                     x-stoplight:
                       id: vqyxmg2ba9am7
-                    description: The City
-                  post_code:
+                    description: The city or locality where the address is located
+                  postal_code:
                     type: string
                     x-stoplight:
                       id: 9tha5mdy3wk4k
-                    description: The post code
+                    description: 'A series of characters that identifies a specific geographic area or address for postal delivery such as postcode, post code, PIN or ZIP Code.'
                   region:
                     type: string
                     x-stoplight:
                       id: g0xl5n15djwi0
-                    description: The region
+                    description: 'The region, state, or province where the city is located'
                   country:
                     type: string
                     x-stoplight:
                       id: at8c11so34fik
-                    description: The country
+                    description: The country where the address is located
       description: PDFCommunication model
       title: PDFCommunication
       examples:
