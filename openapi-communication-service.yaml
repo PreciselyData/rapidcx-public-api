@@ -37,12 +37,6 @@ paths:
               schema:
                 type: string
               description: Indicates the original media type of the resource
-            Location:
-              schema:
-                type: string
-                format: uri
-                example: 'https://api.us-east-1.rapidcx.engageone.co/communications/a28f029e-07d6-4403-a821-9424fef1fe65'
-              description: Created resource location URI
           content:
             application/json:
               schema:
