@@ -171,7 +171,7 @@ paths:
                     - type: MAIL_BCC
                       address: bcc1@homebanking.co.uk
                       name: Home Banking (BCC)
-              Ex2 email communication with complex data:
+              Ex2 email communication with nested json:
                 value:
                   communication_definition_name: Bank statement email communication definition 65362
                   communication_type: EMAIL_COMMUNICATION
@@ -229,7 +229,7 @@ paths:
                       city: Belfast
                       postal_code: BT1 3ZQ
                       country: United Kingdom
-              Ex4 pdf communication with complex data:
+              Ex4 pdf communication with nested json:
                 value:
                   communication_definition_name: Bank statement pdf communication definition 75362
                   communication_type: PDF_COMMUNICATION
@@ -270,7 +270,7 @@ paths:
                     Account Number: GB 55 BUKB 200415 64372438
                   recipients:
                     - phone_number: '+442071838750'
-              Ex6 simple SMS communication:
+              Ex6 SMS communication with nested json:
                 value:
                   communication_definition_name: Bank statement SMS communication definition 78534
                   communication_type: SMS_COMMUNICATION
@@ -278,6 +278,13 @@ paths:
                     Customer Name: Mike Spencer
                     Account Type: Silver
                     Account Number: GB 55 BUKB 200415 64372438
+                    Printed Plastic Cards:
+                      Cards:
+                        - Member Number: '63562'
+                          Title: Mr
+                          Full Name: Mike Spencer
+                          Valid thru: 02/26
+                          Status: Regular
                   recipients:
                     - phone_number: '+442071356476'
     parameters:
