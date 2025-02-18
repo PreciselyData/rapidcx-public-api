@@ -156,7 +156,6 @@ paths:
               Ex1 simple email communication:
                 value:
                   communication_definition_name: Bank letter email communication definition 37894
-                  document_type: letters
                   communication_type: EMAIL_COMMUNICATION
                   communication_data:
                     Customer Name: Jake Olson
@@ -175,7 +174,6 @@ paths:
               Ex2 email communication with complex data:
                 value:
                   communication_definition_name: Bank statement email communication definition 65362
-                  document_type: statements
                   communication_type: EMAIL_COMMUNICATION
                   communication_data:
                     Customer Name: John Mike Doe
@@ -213,7 +211,6 @@ paths:
               Ex3 simple pdf communication:
                 value:
                   communication_definition_name: Bank letter pdf communication definition 43627
-                  document_type: letters
                   communication_type: PDF_COMMUNICATION
                   communication_data:
                     Customer Name: Jake Olson
@@ -235,7 +232,6 @@ paths:
               Ex4 pdf communication with complex data:
                 value:
                   communication_definition_name: Bank statement pdf communication definition 75362
-                  document_type: statements
                   communication_type: PDF_COMMUNICATION
                   communication_data:
                     Customer Name: Mike Appleseed
@@ -267,7 +263,6 @@ paths:
               Ex5 simple SMS communication:
                 value:
                   communication_definition_name: Insurance letter SMS communication definition 6372
-                  document_type: letters
                   communication_type: SMS_COMMUNICATION
                   communication_data:
                     Customer Name: Jake Downhill
@@ -278,7 +273,6 @@ paths:
               Ex6 simple SMS communication:
                 value:
                   communication_definition_name: Bank statement SMS communication definition 78534
-                  document_type: statements
                   communication_type: SMS_COMMUNICATION
                   communication_data:
                     Customer Name: Mike Spencer
@@ -444,7 +438,6 @@ components:
       description: CommonCommunication model
       examples:
         - communication_definition_name: business letter 4653
-          document_type: letter
           communication_type: EMAIL_COMMUNICATION
           communication_data:
             Customer Name: Jake Olson
@@ -452,7 +445,6 @@ components:
             Account Number: GB 55 BUKB 200415 64372438
       required:
         - communication_definition_name
-        - document_type
         - communication_type
       properties:
         communication_definition_name:
@@ -461,12 +453,6 @@ components:
             id: njrjlpje4adso
           description: The unique name of the communication definition object created in RapidCX
           example: business letter 0001
-        document_type:
-          type: string
-          x-stoplight:
-            id: bojpimqqrrltn
-          example: letter
-          description: 'The category of the document being created (e.g., letters, statements, claims)'
         communication_type:
           x-stoplight:
             id: k4fgdf57l74jk
@@ -531,7 +517,6 @@ components:
       title: EmailCommunication
       examples:
         - communication_definition_name: business letter 0001
-          document_type: letter
           communication_type: EMAIL_COMMUNICATION
           communication_data:
             Customer Name: Mike Doe
@@ -588,7 +573,6 @@ components:
       title: SMSCommunication
       examples:
         - communication_definition_name: business letter 1342
-          document_type: letter
           communication_type: SMS_COMMUNICATION
           communication_data:
             Customer Name: Jake Olson
@@ -662,7 +646,6 @@ components:
       title: PDFCommunication
       examples:
         - communication_definition_name: business letter 4653
-          document_type: letter
           communication_type: PDF_COMMUNICATION
           communication_data:
             Customer Name: John Henry Doe
