@@ -3,7 +3,7 @@ x-stoplight:
   id: ez03q9slzf0uc
 info:
   title: Rapid CX Communications API
-  version: '2025-01-23'
+  version: '2025-02-13'
   description: This specification describes the public Communication API of the EngageOne RapidCX Platform.
   summary: EngageOne RapidCX Communication API
   contact:
