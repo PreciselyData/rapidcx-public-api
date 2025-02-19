@@ -31,7 +31,7 @@ Backward incompatible changes are changes to the API that may affect existing co
 
 The RapidCX API uses request header versioning. Where it is required you need to use the `RapidCX-Api-Version` header parameter to specify an API version. Each request, where it is indicated in the API specification, should contain a version header in the following format:
 
-**Example:** `RapidCX-Api-Version: 2025-03-21`
+**Example:** `RapidCX-Api-Version: 2025-02-13`
 
 The `RapidCX-Api-Version` header is **optional**, the endpoint will default to the newest released API version if the header is not provided.
 
