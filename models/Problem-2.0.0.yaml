@@ -81,7 +81,7 @@ properties:
           type: string
           x-stoplight:
             id: 9hezux0v1ayvq
-          example: 'The attribute "quantity" is missing in the file with ID: "e241f5d6-676a-4fd7-b08d-2b07b6da6ed0"'
+          example: 'The attribute "quantity" is missing in the file with ID: e241f5d6-676a-4fd7-b08d-2b07b6da6ed0'
           description: |
             A human-readable message describing the specific issue encountered.
             This error relates to a specific part of the request, as identified by the `instance` URI.
