@@ -1,0 +1,95 @@
+title: Problem
+x-stoplight:
+  id: 9z1i332o1qsff
+type: object
+description: Represents an error response returned by the RapidCX API.
+examples:
+  - status: 400
+    code: 400-02
+    type: 'https://docs.developer.rapidcx.engageone.co/'
+    title: Your query was incorrectly structured
+    detail: We identified several issues with your payload. Refer to the `errors` array for more information.
+    errors:
+      - detail: "The attribute 'quantity' is missing in the file with ID: e241f5d6-676a-4fd7-b08d-2b07b6da6ed0"
+        instance: /archiver/quantity/123
+  - status: 400
+    code: 400-03
+    type: 'https://docs.developer.rapidcx.engageone.co/'
+    title: Your query was incorrectly structured
+    detail: We identified several issues with your payload. Refer to the `errors` array for more information.
+    errors:
+      - detail: "The attribute 'quantity' is missing in the file with ID: e241f5d6-676a-4fd7-b08d-2b07b6da6ed0"
+        instance: /archiver/quantity/123
+      - detail: The name field cannot contain special characters
+        instance: /archiver/another-structure/name
+      - detail: The object with ID 5561d2ff-d6f7-464c-ad70-e812e6e6fde5 does not exist
+        instance: /archiver/object-reference/5561d2ff-d6f7-464c-ad70-e812e6e6fde5
+required:
+  - status
+  - code
+  - title
+  - detail
+properties:
+  status:
+    type: integer
+    x-stoplight:
+      id: 0flv9lnnzes8r
+    format: int32
+    example: 400
+    description: |
+      The HTTP status code returned by the server for this particular error.
+  code:
+    type: string
+    x-stoplight:
+      id: wl4w9olnmdv8u
+    example: 400-03
+    description: A custom code identifying the specific error scenario.
+  type:
+    type: string
+    x-stoplight:
+      id: brigzcjc8gusd
+    example: 'https://docs.developer.rapidcx.engageone.co/'
+    description: A link to the documentation that provides more details about the error.
+  title:
+    type: string
+    x-stoplight:
+      id: 385f5mgpo1w0l
+    example: Your query was incorrectly structured
+    description: |
+      A short, human-readable summary of the error type.
+      This is intended for developers and may not be localized or suitable for end-users.
+  detail:
+    type: string
+    x-stoplight:
+      id: m39xucw8nxho8
+    example: We identified several issues with your payload. Refer to the `errors` array for more information.
+    description: |
+      A detailed explanation of the specific error that occurred.
+  errors:
+    type: array
+    x-stoplight:
+      id: r64xc0rj6z8w5
+    minItems: 0
+    description: |
+      An array containing specific issues related to the request payload.
+    items:
+      type: object
+      x-stoplight:
+        id: 3ic541amlhskn
+      properties:
+        detail:
+          type: string
+          x-stoplight:
+            id: 9hezux0v1ayvq
+          example: "The attribute 'quantity' is missing in the file with ID: 'e241f5d6-676a-4fd7-b08d-2b07b6da6ed0'"
+          description: |
+            A human-readable message describing the specific issue encountered.
+            This error relates to a specific part of the request, as identified by the `instance` URI.
+        instance:
+          type: string
+          x-stoplight:
+            id: xvn70638emcuf
+          format: uri
+          example: /archiver/quantity/123
+          description: |
+            A URI that identifies the exact part of the request where the issue occurred.
